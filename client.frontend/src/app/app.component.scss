@@ -1,0 +1,16 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.container {
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.full-width {
+  width: 100%;
+}

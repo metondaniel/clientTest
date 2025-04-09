@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="header">
+    <h1>Clientes</h1>
+    <button mat-raised-button color="primary" (click)="openForm()">
+      <mat-icon>add</mat-icon> Novo Cliente
+    </button>
+  </div>
+
+  <mat-table [dataSource]="clients" class="mat-elevation-z8">
+    <!-- Nome Column -->
+    <ng-container matColumnDef="nome">
+      <mat-header-cell *matHeaderCellDef> Nome/Razão Social </mat-header-cell>
+      <mat-cell *matCellDef="let client"> {{ client.nomeRazaoSocial }} </mat-cell>
+    </ng-container>
+
+    <!-- Documento Column -->
+    <ng-container matColumnDef="documento">
+      <mat-header-cell *matHeaderCellDef> CPF/CNPJ </mat-header-cell>
+      <mat-cell *matCellDef="let client">
+        {{ client.cpfCnpj | cpfCnpj }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Tipo Column -->
+    <ng-container matColumnDef="tipo">
+      <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+      <mat-cell *matCellDef="let client">
+        {{ client.tipo === 'FISICA' ? 'Pessoa Física' : 'Pessoa Jurídica' }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
+      <mat-cell *matCellDef="let client"> {{ client.email }} </mat-cell>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+      <mat-cell *matCellDef="let client">
+        <button mat-icon-button color="primary" (click)="openForm(client)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteClient(client.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

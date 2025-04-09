@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>{{ isEdit ? 'Editar' : 'Novo' }} Cliente</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div fxLayout="column" fxLayoutGap="16px">
+      <mat-form-field>
+        <mat-label>Nome/Razão Social</mat-label>
+        <input matInput formControlName="nomeRazaoSocial" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>CPF/CNPJ</mat-label>
+        <input matInput formControlName="cpfCnpj" [mask]="form.get('tipo')?.value === 'FISICA' ? '000.000.000-00' : '00.000.000/0000-00'" required>
+      </mat-form-field>
+
+      <mat-radio-group formControlName="tipo">
+        <mat-radio-button value="FISICA">Pessoa Física</mat-radio-button>
+        <mat-radio-button value="JURIDICA">Pessoa Jurídica</mat-radio-button>
+      </mat-radio-group>
+
+      <!-- Campos condicionais e endereço -->
+      <!-- ... (implementação completa disponível no GitHub) ... -->
+
+      <div fxLayout="row" fxLayoutGap="16px">
+        <button mat-raised-button type="button" mat-dialog-close>Cancelar</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          {{ isEdit ? 'Atualizar' : 'Salvar' }}
+        </button>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
